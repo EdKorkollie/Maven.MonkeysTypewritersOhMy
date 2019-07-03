@@ -2,6 +2,7 @@ package io.zipcoder;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  * We're using this as an abstract base class since both the safe and unsafe copiers will implement it.
@@ -16,6 +17,17 @@ public abstract class Copier implements Runnable {
         this.stringIterator = Arrays.asList(toCopy.split(" ")).iterator();
         this.copied = "";
     }
+    Random random = new Random();
 
-    public abstract void run();
+    public  void run(){
+        try{
+            while(stringIterator.hasNext()) {
+                String temp = stringIterator.next() + " ";
+                Thread.sleep(random.nextInt(10));
+                copied = copied +temp;
+            }
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
